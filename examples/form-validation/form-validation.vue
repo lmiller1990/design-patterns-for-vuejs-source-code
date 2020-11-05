@@ -1,38 +1,41 @@
 <template>
-  <h3>Patient Data</h3>
-  <form @submit.prevent="submit">
-    <div class="field">
-      <div v-if="!validatedForm.name.valid" class="error">
-        {{ validatedForm.name.message }}
+  <div class="form-wrapper">
+    <h3>Patient Data</h3>
+    <form @submit.prevent="submit">
+      <div class="field">
+        <div v-if="!validatedForm.name.valid" class="error">
+          {{ validatedForm.name.message }}
+        </div>
+        <label for="name">Name</label>
+        <input id="name" name="name" v-model="form.name" />
       </div>
-      <label for="name">Name</label>
-      <input id="name" name="name" v-model="form.name" />
-    </div>
-    <div class="field">
-      <div v-if="!validatedForm.weight.valid" class="error">
-        {{ validatedForm.weight.message }}
+      <div class="field">
+        <div v-if="!validatedForm.weight.valid" class="error">
+          {{ validatedForm.weight.message }}
+        </div>
+        <label for="weight">Weight</label>
+        <input id="weight" name="weight" v-model.number="form.weight.value" />
+        <select id="weight-units" v-model="form.weight.units">
+          <option value="kg">kg</option>
+          <option value="lb">lb</option>
+        </select>
       </div>
-      <label for="weight">Weight</label>
-      <input id="weight" name="weight" v-model.number="form.weight.value" />
-      <select id="weight-units" v-model="form.weight.units">
-        <option value="kg">kg</option>
-        <option value="lb">lb</option>
-      </select>
-    </div>
-    <div class="field">
-      <button :disabled="!valid">Submit</button>
-    </div>
-  </form>
+      <div class="field">
+        <button :disabled="!valid">Submit</button>
+      </div>
+    </form>
+    <div>
 <pre>
 Patient Data
 {{ form }}
 </pre>
-<br />
 
 <pre>
 Form State
 {{ validatedForm }}
 </pre>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -83,5 +86,13 @@ export default {
 
 .error {
   color: red;
+}
+
+pre {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.form-wrapper {
 }
 </style>
