@@ -1,7 +1,8 @@
 import { mount } from '@vue/test-utils'
+import TicTacToeApp from './tic-tac-toe-app.vue'
 import { createGame, makeMove, initialBoard } from './tic-tac-toe.js'
 
-xdescribe('TicTacToeApp', () => {
+describe('TicTacToeApp', () => {
   it('plays a game', async () => {
     const wrapper = mount(TicTacToeApp)
 
@@ -27,15 +28,16 @@ describe('useTicTacToe', () => {
 })
 
 describe('makeMove', () => {
-  it('returns a new updaed board', () => {
+  it('returns a new updated board and counter', () => {
     const board = createGame(initialBoard)
-    const updatedBoard = makeMove(board, {
+    const { newBoard, newCounter } = makeMove(board, {
       row: 0, 
       col: 0, 
       counter: 'o'
     })
 
-    expect(updatedBoard).toEqual([
+    expect(newCounter).toBe('x')
+    expect(newBoard).toEqual([
       ['o', '-', '-'],
       ['-', '-', '-'],
       ['-', '-', '-']

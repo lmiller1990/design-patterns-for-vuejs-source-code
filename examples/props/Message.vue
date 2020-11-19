@@ -1,5 +1,5 @@
 <template>
-  <div :class="variant">Message</div>
+  <div :class="variant">Message! {{ variant }}?</div>
 </template>
 
 <script>
@@ -14,7 +14,6 @@ export function validateVariant(variant) {
 export default {
   props: {
     variant: {
-      type: String,
       required: true,
       validator: validateVariant
     }

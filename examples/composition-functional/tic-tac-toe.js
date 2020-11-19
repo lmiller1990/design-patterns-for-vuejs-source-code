@@ -15,13 +15,19 @@ export function createGame(initialState) {
 }
 
 export function makeMove(board, { col, row, counter }) {
-  return board.map((theRow, rowIdx) =>
+  const newBoard = board.map((theRow, rowIdx) =>
     theRow.map((cell, colIdx) => 
       rowIdx === row && colIdx === col
       ? counter
       : cell
     )
   )
+  const newCounter = counter === 'o' ? 'x' : 'o'
+
+  return {
+    newBoard,
+    newCounter
+  }
 }
 
 /**
@@ -32,7 +38,7 @@ export function useTicTacToe() {
   const boards = ref([initialBoard])
   const counter = ref('o')
   const move = ({ col, row }) => {
-    const newBoard = makeMove(
+    const { newBoard, newCounter } = makeMove(
       currentBoard.value,
       {
         col,
@@ -41,7 +47,7 @@ export function useTicTacToe() {
       }
     )
     boards.value.push(newBoard)
-    counter.value = counter.value === 'o' ? 'x' : 'o'
+    counter.value = newCounter
   }
 
   const currentBoard = computed(() => {
