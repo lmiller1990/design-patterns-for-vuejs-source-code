@@ -11,36 +11,27 @@
     <div class="wrapper">
       <div class="field">
         <label for="password">Password</label>
-        <input type="password" v-model="input.password" id="password" />
+        <input v-model="input.password" id="password" />
       </div>
       <div class="field">
         <label for="confirmation">Confirmation</label>
         <input v-model="input.confirmation" id="confirmation" />
       </div>
-      <div  class="field">
-        <label for="confirmation" style="color: white; width: 100px">_</label>
-      <button style="width: 100%" :disabled="!valid">Go</button>
-    </div>
+      <div class="complexity-field">
+        <div
+          class="complexity"
+          :class="complexityStyle(complexity)"
+        />
+      </div>
+      <div class="field">
+        <button :disabled="!valid">Submit</button>
+      </div>
     </div>
 
-    <div class="rating">
-      <div v-for="i in complexity" :key="i">
-        ✅
-      </div>
-      <div v-for="i in (3 - complexity)" :key="i">
-        ☑️
-      </div>
-    </div>
+    <p>Matches: {{ matching }}</p>
+    <p>Complexity: {{ complexity }}</p>
   </renderless-password>
 </template>
-
-<style>
-.rating {
-  display: flex;
-  width: 100px;
-  justify-content: space-around;
-}
-</style>
 
 <script>
 import { reactive } from 'vue'
@@ -79,17 +70,14 @@ export default {
 
 <style>
 .wrapper {
-  width: 300px;
+  width: 400px;
   display: flex;
+  flex-direction: column;
   align-items: center;
 }
 
-.field:nth-child(1), .field:nth-child(2) {
-  padding-right: 5px;
-}
-
 .field {
-  width: 50%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   font-size: 1.1rem;
