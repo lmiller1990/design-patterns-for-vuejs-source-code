@@ -1,3 +1,5 @@
+![](./banner.jpg)
+
 Source code and solutions for exercises in my book, [Design Patterns for Vue.js: A Test Driven Approach to Maintainable Applications](https://lachlan-miller.me/design-patterns-for-vuejs).
 
 If you want to run the tests locally, you can install the dependencies with `yarn install` and run them with `yarn test`.
