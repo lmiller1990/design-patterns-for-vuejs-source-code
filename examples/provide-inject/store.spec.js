@@ -1,4 +1,4 @@
-import { mount } from '@vue/test-utils'
+import { render, screen, fireEvent } from '@testing-library/vue'
 import { Store } from './store.js'
 import Users from './users.vue'
 
@@ -36,7 +36,7 @@ describe('store', () => {
   })
 
   it('renders a user', async () => {
-    const wrapper = mount(Users, {
+    render(Users, {
       global: {
         provide: {
           store: new Store({
@@ -46,9 +46,8 @@ describe('store', () => {
       }
     })
 
-    await wrapper.find('input').setValue('Alice')
-    await wrapper.find('button').trigger('submit.prevent')
-
-    expect(wrapper.html()).toContain('Alice')
+    await fireEvent.update(screen.getByRole('username'), 'Alice')
+    await fireEvent.click(screen.getByRole('submit'))
+    await screen.findByText('Alice')
   })
 })

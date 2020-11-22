@@ -1,6 +1,6 @@
 <template>
-  <button id="increment" @click="increment" />
-  <button id="submit" @click="submit" />
+  <button role="increment" @click="increment" />
+  <button role="submit" @click="submit" />
 </template>
 
 <script>

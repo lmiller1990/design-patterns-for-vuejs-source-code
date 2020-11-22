@@ -5,9 +5,9 @@
     :validator="customValidator"
     v-slot="{ valid }"
   >
-    <input v-model="input.password" id="password" />
-    <input v-model="input.confirmation" id="confirmation" />
-    <button :disabled="!valid">Submit</button>
+    <input v-model="input.password" role="password" />
+    <input v-model="input.confirmation" role="confirmation" />
+    <button role="submit" :disabled="!valid">Submit</button>
   </renderless-password>
 </template>
 

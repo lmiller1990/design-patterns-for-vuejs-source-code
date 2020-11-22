@@ -1,16 +1,16 @@
-import { mount } from '@vue/test-utils'
+import { render, screen } from '@testing-library/vue'
 import Message, { validateVariant } from './Message.vue'
 import Navbar from './Navbar.vue'
 
 describe('Message', () => {
   it('renders variant correctly when passed', () => {
-    const wrapper = mount(Message, {
+    const { container } = render(Message, {
       props: {
         variant: 'success'
       }
     })
 
-    expect(wrapper.classes()).toContain('success')
+    expect(container.firstChild.classList).toContain('success')
   })
 
   it('validates valid variant prop', () => {
@@ -25,24 +25,24 @@ describe('Message', () => {
 })
 
 describe('Navbar', () => {
-  function navbarFactory(props) {
-    return mount(Navbar, {
+  function renderNavbar(props) {
+    render(Navbar, {
       props
     })
   }
 
   it('shows login authenticated is true', () => {
-    const wrapper = navbarFactory({ authenticated: true })
-    expect(wrapper.html()).toContain('Logout')
+    renderNavbar({ authenticated: true })
+    screen.getByText('Logout')
   })
 
   it('shows logout by default', () => {
-    const wrapper = navbarFactory()
-    expect(wrapper.find('a').text()).toBe('Login')
+    renderNavbar()
+    screen.getByText('Login')
   })
 
   it('shows login when authenticated is false', () => {
-    const wrapper = navbarFactory({ authenticated: false })
-    expect(wrapper.find('a').text()).toBe('Login')
+    renderNavbar({ authenticated: false })
+    screen.getByText('Login')
   })
 })

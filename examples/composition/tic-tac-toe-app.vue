@@ -3,7 +3,7 @@
     <div 
       v-for="col, colIdx in row" 
       class="col" 
-      :data-test="`row-${rowIdx}-col-${colIdx}`"
+      :data-testid="`row-${rowIdx}-col-${colIdx}`"
       @click="makeMove({ row: rowIdx, col: colIdx })"
     >
       {{ col }}

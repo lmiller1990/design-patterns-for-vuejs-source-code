@@ -1,7 +1,7 @@
 <template>
-  <input data-test-year :value="date.year" @input="update($event, 'year')" />
-  <input data-test-month :value="date.month" @input="update($event, 'month')" />
-  <input data-test-day :value="date.day" @input="update($event, 'day')" />
+  <input role="year" :value="date.year" @input="update($event, 'year')" />
+  <input role="month" :value="date.month" @input="update($event, 'month')" />
+  <input role="day" :value="date.day" @input="update($event, 'day')" />
 <pre>
 date is:
 {{ date }} 

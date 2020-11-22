@@ -19,6 +19,7 @@
       </div>
       <div class="complexity-field">
         <div
+          role="password-complexity"
           class="complexity"
           :class="complexityStyle(complexity)"
         />

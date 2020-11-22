@@ -3,14 +3,14 @@
     <h3>Patient Data</h3>
     <form @submit.prevent="submit">
       <div class="field">
-        <div v-if="!validatedForm.name.valid" class="error">
+        <div v-if="!validatedForm.name.valid" class="error" role="error">
           {{ validatedForm.name.message }}
         </div>
         <label for="name">Name</label>
         <input id="name" name="name" v-model="form.name" />
       </div>
       <div class="field">
-        <div v-if="!validatedForm.weight.valid" class="error">
+        <div v-if="!validatedForm.weight.valid" class="error" role="error">
           {{ validatedForm.weight.message }}
         </div>
         <label for="weight">Weight</label>
@@ -21,7 +21,7 @@
         </select>
       </div>
       <div class="field">
-        <button :disabled="!valid">Submit</button>
+        <button role="submit" :disabled="!valid">Submit</button>
       </div>
     </form>
     <div>

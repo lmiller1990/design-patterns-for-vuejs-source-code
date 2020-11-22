@@ -1,12 +1,14 @@
-import { mount } from '@vue/test-utils'
+import { render, screen, fireEvent } from '@testing-library/vue'
 import Counter, { submitValidator } from './counter.vue'
 
 describe('Counter', () => {
   it('emits an event with the current count', async () => {
-    const wrapper = mount(Counter) 
-    await wrapper.find('#increment').trigger('click')
-    await wrapper.find('#submit').trigger('click')
-    expect(wrapper.emitted().submit[0]).toEqual([1])
+    const { emitted } = render(Counter) 
+
+    await fireEvent.click(screen.getByRole('increment'))
+    await fireEvent.click(screen.getByRole('submit'))
+
+    expect(emitted().submit[0]).toEqual([1])
   })
 })
 

@@ -1,11 +1,10 @@
-import { mount } from '@vue/test-utils'
+import { render, screen, fireEvent } from '@testing-library/vue'
 import App from './app.vue'
 
 test('tabs', async () => {
-  const wrapper = mount(App)
-  expect(wrapper.html()).not.toContain('Content #2')
+  render(App)
+  expect(screen.queryByText('Content #2')).toBeFalsy()
 
-  await wrapper.find('[data-test="2"]').trigger('click')
-
-  expect(wrapper.html()).toContain('Content #2')
+  fireEvent.click(screen.getByText('Tab #2'))
+  await screen.findByText('Content #2')
 })

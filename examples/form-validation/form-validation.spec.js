@@ -1,45 +1,53 @@
-import { mount } from '@vue/test-utils'
+import { render, screen, fireEvent } from '@testing-library/vue'
 import FormValidation from './form-validation.vue'
 
 describe('FormValidation', () => {
   it('fills out form correctly', async () => {
-    const wrapper = mount(FormValidation)
+    render(FormValidation)
 
-    await wrapper.find('#name').setValue('lachlan')
-    await wrapper.find('#weight-units').setValue('lb')
-    await wrapper.find('#weight').setValue('150')
+    await fireEvent.update(
+      screen.getByLabelText('Name'),
+      { target: { value: 'lachlan' } }
+    )
 
-    expect(wrapper.findAll('.error')).toHaveLength(0)
-  })
+     await fireEvent.update(screen.getByDisplayValue('kg'), 'lb')
 
-  it('shows errors for invalid inputs', async () => {
-    const wrapper = mount(FormValidation)
+    await fireEvent.update(
+      screen.getByLabelText('Weight'),
+      { target: { value: '150' } }
+    )
 
-    await wrapper.find('#name').setValue('')
-    await wrapper.find('#weight-units').setValue('lb')
-    await wrapper.find('#weight').setValue('50')
-
-    expect(wrapper.findAll('.error')).toHaveLength(2)
+    expect(screen.queryByRole('error')).toBe(null)
   })
 
   it('emits a submit event with patientForm when valid form submitted', async () => {
-    const wrapper = mount(FormValidation)
+    const { emitted } = render(FormValidation)
 
-    await wrapper.find('#name').setValue('lachlan')
-    await wrapper.find('#weight-units').setValue('kg')
-    await wrapper.find('#weight').setValue('100')
-    await wrapper.find('form').trigger('submit.prevent')
+    await fireEvent.update(screen.getByLabelText('Name'), 'lachlan')
+    await fireEvent.update(screen.getByLabelText('Weight'), '150')
+    await fireEvent.update(screen.getByDisplayValue('kg'), 'lb')
+    await fireEvent.click(screen.getByText('Submit'))
 
-    expect(wrapper.emitted('submit')[0]).toEqual([
+    expect(emitted().submit[0]).toEqual([
       {
         patient: {
           name: 'lachlan',
           weight: {
-            value: 100,
-            units: 'kg'
+            value: 150,
+            units: 'lb'
           }
         }
       }
     ])
+  })
+
+  it('shows errors for invalid inputs', async () => {
+    render(FormValidation)
+
+    await fireEvent.update(screen.getByLabelText('Name'), '')
+    await fireEvent.update(screen.getByLabelText('Weight'), '5')
+    await fireEvent.update(screen.getByDisplayValue('kg'), 'lb')
+
+    expect(screen.getAllByRole('error')).toHaveLength(2)
   })
 })
