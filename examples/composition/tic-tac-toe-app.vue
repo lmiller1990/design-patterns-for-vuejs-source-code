@@ -1,9 +1,11 @@
 <template>
-  <div v-for="row, rowIdx in currentBoard" class="row">
+  <div v-for="(row, rowIdx) in currentBoard" :key="rowIdx" class="row">
     <div 
-      v-for="col, colIdx in row" 
+      v-for="(col, colIdx) in row" 
       class="col" 
+      :key="colIdx"
       :data-testid="`row-${rowIdx}-col-${colIdx}`"
+      :data-test="`row-${rowIdx}-col-${colIdx}`"
       @click="makeMove({ row: rowIdx, col: colIdx })"
     >
       {{ col }}

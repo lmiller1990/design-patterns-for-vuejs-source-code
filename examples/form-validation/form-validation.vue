@@ -7,15 +7,15 @@
           {{ validatedForm.name.message }}
         </div>
         <label for="name">Name</label>
-        <input id="name" name="name" v-model="form.name" />
+        <input id="name" name="name" role="name" v-model="form.name" />
       </div>
       <div class="field">
         <div v-if="!validatedForm.weight.valid" class="error" role="error">
           {{ validatedForm.weight.message }}
         </div>
         <label for="weight">Weight</label>
-        <input id="weight" name="weight" v-model.number="form.weight.value" />
-        <select id="weight-units" v-model="form.weight.units">
+        <input id="weight" role="weight" name="weight" v-model.number="form.weight.value" />
+        <select id="weight-units" role="weight-units" v-model="form.weight.units">
           <option value="kg">kg</option>
           <option value="lb">lb</option>
         </select>

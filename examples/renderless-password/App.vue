@@ -11,11 +11,11 @@
     <div class="wrapper">
       <div class="field">
         <label for="password">Password</label>
-        <input v-model="input.password" id="password" />
+        <input v-model="input.password" id="password" role="password" />
       </div>
       <div class="field">
         <label for="confirmation">Confirmation</label>
-        <input v-model="input.confirmation" id="confirmation" />
+        <input v-model="input.confirmation" id="confirmation" role="confirmation" />
       </div>
       <div class="complexity-field">
         <div

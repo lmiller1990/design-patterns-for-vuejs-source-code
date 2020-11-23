@@ -73,3 +73,49 @@ describe('component using renderless-password', () => {
     expect(screen.getByText('Submit').disabled).toBeTruthy()
   })
 })
+
+import { mount } from '@vue/test-utils'
+
+describe('component using renderless-password', () => {
+  it('supports custom validator', async () => {
+    const wrapper = mount(AppWithCustomValidator)
+
+    await wrapper.find('[role="password"]').setValue('this is a long password')
+    await wrapper.find('[role="confirmation"]').setValue('this is a long password')
+
+    // customValidator in AppWithCustomValidator return false no matter what
+    // so button is always disabled.
+    expect(wrapper.find('button').element.disabled).toBe(true)
+  })
+
+  it('meets default requirements', async () => {
+    const wrapper = mount(TestComponent)
+
+    await wrapper.find('#password').setValue('this is a long password')
+    await wrapper.find('#confirmation').setValue('this is a long password')
+
+    expect(wrapper.find('.complexity.low').exists()).not.toBe(true)
+    expect(wrapper.find('.complexity.high').exists()).toBe(true)
+    expect(wrapper.find('button').element.disabled).toBe(false)
+  })
+
+  it('does not meet complexity requirements', async () => {
+    const wrapper = mount(TestComponent)
+
+    await wrapper.find('[role="password"]').setValue('shorty')
+    await wrapper.find('[role="confirmation"]').setValue('shorty')
+
+    expect(wrapper.find('button').element.disabled).toBe(true)
+    expect(wrapper.find('.complexity.high').exists()).not.toBe(true)
+    expect(wrapper.find('.complexity.low').exists()).toBe(true)
+  })
+
+  it('password and confirmation does not match', async () => {
+    const wrapper = mount(TestComponent)
+
+    await wrapper.find('[role="password"]').setValue('abc')
+    await wrapper.find('[role="confirmation"]').setValue('def')
+
+    expect(wrapper.find('button').element.disabled).toBe(true)
+  })
+})

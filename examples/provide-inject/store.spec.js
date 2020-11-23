@@ -51,3 +51,25 @@ describe('store', () => {
     await screen.findByText('Alice')
   })
 })
+
+
+import { mount } from '@vue/test-utils'
+
+describe('store', () => {
+  it('renders a user', async () => {
+    const wrapper = mount(Users, {
+      global: {
+        provide: {
+          store: new Store({
+            users: []
+          })
+        }
+      }
+    })
+
+    await wrapper.find('input').setValue('Alice')
+    await wrapper.find('button').trigger('submit.prevent')
+
+    expect(wrapper.html()).toContain('Alice')
+  })
+})
