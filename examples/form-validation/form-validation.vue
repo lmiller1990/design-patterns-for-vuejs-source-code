@@ -43,6 +43,8 @@ import { reactive, computed, ref } from 'vue'
 import { patientForm, isFormValid } from './form.js'
 
 export default {
+  emits: ['submit'],
+
   setup(props, { emit }) {
     const form = reactive({
       name: '',

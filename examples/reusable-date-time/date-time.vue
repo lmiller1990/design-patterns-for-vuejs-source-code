@@ -13,6 +13,8 @@ import { reactive, watch, computed } from 'vue'
 import { DateTime } from 'luxon'
 
 export default {
+  emits: ['update:modelValue'],
+
   props: {
     modelValue: {
       type: Object

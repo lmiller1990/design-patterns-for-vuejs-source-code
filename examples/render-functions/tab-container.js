@@ -27,6 +27,9 @@ export const TabContainer = {
     activeTabId: String
   },
 
+
+  emits: ['update:activeTabId'],
+
   render() {
     const $slots = this.$slots.default()
     const tabs = $slots
