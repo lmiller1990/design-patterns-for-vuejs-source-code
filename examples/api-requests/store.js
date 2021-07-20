@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { createStore } from 'vuex'
 
-export const store = {
+export const store = createStore({
   state() {
     return {
       user: undefined
@@ -18,4 +18,4 @@ export const store = {
       commit('updateUser', response.data)
     }
   }
-}
+})
