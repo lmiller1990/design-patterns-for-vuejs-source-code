@@ -21,7 +21,11 @@ describe('login', () => {
   afterAll(() => server.close())
 
   it('successfully authenticates', async () => {
-    render(Login, { store })
+    render(Login, {
+      global: {
+        plugins: [store]
+      }
+    })
     await fireEvent.update(
       screen.getByRole('username'), 'Lachlan')
     await fireEvent.update(
@@ -42,7 +46,11 @@ describe('login', () => {
       })
     )
 
-    render(Login, { store })
+    render(Login, {
+      global: {
+        plugins: [store]
+      }
+    })
     await fireEvent.update(
       screen.getByRole('username'), 'Lachlan')
     await fireEvent.update(
