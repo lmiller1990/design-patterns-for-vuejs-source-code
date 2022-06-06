@@ -18,6 +18,11 @@ describe('submitValidator', () => {
     expect(actual).toThrow()
   })
 
+  it('throws and error when count is NOT a number', () => {
+    const actual = () => submitValidator([])
+    expect(actual).toThrow()
+  })
+
   it('returns true when count is a number', () => {
     const actual = () => submitValidator(1)
     expect(actual).not.toThrow()
