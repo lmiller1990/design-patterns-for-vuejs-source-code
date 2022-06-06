@@ -14,7 +14,7 @@ describe('Counter', () => {
 
 describe('submitValidator', () => {
   it('throws and error when count isNaN', () => {
-    const actual = () => submitValidator('1')
+    const actual = () => submitValidator(NaN)
     expect(actual).toThrow()
   })
 
