@@ -15,7 +15,7 @@ describe('required', () => {
     expect(required('')).toEqual({ valid: false, message: 'Required' })
   })
 
-  it('returns true false value is present', () => {
+  it('returns true when value is present', () => {
     expect(required('some value')).toEqual({ valid: true })
   })
 })
