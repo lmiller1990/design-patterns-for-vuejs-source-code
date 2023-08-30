@@ -25,6 +25,6 @@
   "scripts": {
     "cypress:run": "cypress run --component --spec 'examples/**/*.cy.ts'",
     "cypress:open": "cypress open --component -b chrome --spec 'examples/**/*.cy.ts'",
-    "vitest": "vitest --run source-code"
+    "vitest": "vitest --run"
   }
 }
